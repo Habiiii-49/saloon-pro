@@ -1,0 +1,225 @@
+/* ============================================================
+   ELEGANCE SALON - INVENTORY MODULE (PART 5)
+   Extends admin/assets/css/admin.css using the same design tokens.
+   ============================================================ */
+
+/* ---------- Inventory specific layout bits ---------- */
+.inv-value { font-family: var(--font-heading); font-weight: 700; color: #fff; white-space: nowrap; }
+.inv-muted { color: var(--text-muted); font-size: 0.78rem; }
+.inv-sku-cell { font-family: 'Montserrat', sans-serif; font-size: 0.76rem; color: var(--text-muted); }
+
+/* Quick stock modal */
+.quick-stock-body { min-height: 160px; }
+.quick-stock-result { margin-top: 0.9rem; }
+
+/* Stock level bar */
+.stock-meter { display: flex; align-items: center; gap: 0.55rem; }
+.stock-meter .meter-track {
+    flex: 1; height: 6px; border-radius: 6px; min-width: 60px;
+    background: rgba(255,255,255,0.08); overflow: hidden; position: relative;
+}
+.stock-meter .meter-fill { position: absolute; inset: 0 auto 0 0; border-radius: 6px; }
+.meter-fill.ok    { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.meter-fill.low   { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.meter-fill.out   { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+/* ---------- Purchase order builder ---------- */
+.po-items-table .admin-table { min-width: 860px; }
+.po-item-name { min-width: 220px; }
+.po-remove-row {
+    width: 38px; height: 38px; border-radius: 10px;
+    border: 1px solid rgba(239,68,68,0.35); background: var(--danger-bg);
+    color: #fca5a5; cursor: pointer; transition: var(--transition);
+}
+.po-remove-row:hover { background: rgba(239,68,68,0.28); color: #fff; }
+.po-total-line { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-top: 1px dashed var(--border); }
+.po-total-line span { color: var(--text-muted); font-size: 0.84rem; }
+.po-total-line strong { color: #fff; font-family: var(--font-heading); }
+.po-grand { border-top: 1px solid var(--border); margin-top: 0.4rem; padding-top: 0.9rem; }
+.po-grand strong { font-size: 1.15rem; color: var(--accent-bright); }
+
+/* Purchase order view / print */
+.po-doc { max-width: 900px; margin: 0 auto; }
+.po-doc-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); margin-bottom: 1.2rem; }
+.po-doc-head .brand { display: flex; align-items: center; gap: 0.7rem; }
+.po-doc-head .brand h4 { margin: 0; font-weight: 800; }
+.po-doc-head .brand small { color: var(--text-muted); }
+.po-doc-meta { text-align: right; }
+.po-doc-meta .po-no { font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; color: #fff; }
+.po-status-pill { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.8rem; border-radius: 50rem; font-size: 0.72rem; font-weight: 700; }
+.po-status-pill.draft              { background: var(--warning-bg); color: #fbbf24; }
+.po-status-pill.pending            { background: var(--warning-bg); color: #fbbf24; }
+.po-status-pill.ordered            { background: var(--info-bg); color: var(--accent-bright); }
+.po-status-pill.partially_received { background: var(--warning-bg); color: #fcd34d; }
+.po-status-pill.received           { background: var(--success-bg); color: var(--success); }
+.po-status-pill.cancelled          { background: var(--danger-bg); color: #f87171; }
+
+/* Receive form per item */
+.receive-qty { max-width: 150px; }
+
+/* Expiry badge */
+.expiry-badge { font-size: 0.72rem; font-weight: 600; padding: 0.22rem 0.6rem; border-radius: 50rem; white-space: nowrap; }
+.expiry-badge.expired   { background: var(--danger-bg); color: #f87171; }
+.expiry-badge.expiring  { background: var(--warning-bg); color: #fcd34d; }
+.expiry-badge.valid     { background: var(--success-bg); color: var(--success); }
+.expiry-badge.none      { background: rgba(148,163,184,0.14); color: #94a3b8; }
+
+/* Report summary chips */
+.report-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+@media (max-width: 992px) { .report-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .report-grid { grid-template-columns: 1fr; } }
+
+/* Inventory filter toolbar */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+.filter-bar .form-control-admin { width: auto; min-width: 150px; }
+.filter-bar select.form-control-admin { min-width: 160px; }
+
+/* Pagination */
+.inv-pagination { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.2rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-muted); }
+.inv-pagination .page-links { display: inline-flex; gap: 0.3rem; }
+.inv-pagination .page-links a {
+    min-width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 9px; border: 1px solid var(--border); color: var(--text-secondary);
+    font-size: 0.82rem; font-weight: 600; transition: var(--transition);
+}
+.inv-pagination .page-links a:hover { border-color: var(--border-accent); color: #fff; }
+.inv-pagination .page-links .cur { background: linear-gradient(135deg, var(--accent-bright), var(--accent)); color: #06242e; border-color: transparent; }
+
+@media print {
+    body.admin-body { background: #fff !important; }
+    .admin-sidebar, .admin-topbar, .sidebar-overlay,
+    .no-print, .page-head .btn-admin { display: none !important; }
+    .admin-main { margin: 0 !important; }
+    .admin-content { padding: 0 !important; max-width: none !important; }
+    .po-doc { box-shadow: none !important; }
+    .po-doc, .admin-card { background: #fff !important; border: 1px solid #ddd !important; color: #111 !important; }
+    .po-doc * { color: #111 !important; border-color: #ddd !important; }
+    .po-doc .po-doc-head { border-bottom-color: #111; }
+    .po-doc table { border-collapse: collapse; width: 100%; }
+    .po-doc table th, .po-doc table td { border: 1px solid #bbb; padding: 6px 8px; font-size: 12px; }
+}
+/* ============================================================
+   ADDENDUM: mark-up used by the PART 5 pages
+   (keeps everything under the same dark-navy / cyan theme)
+   ============================================================ */
+
+/* Extra button variants */
+.btn-gold {
+    color: #2a1f00;
+    background: linear-gradient(135deg, #fbbf24, #d4a843);
+    box-shadow: 0 10px 24px rgba(212, 168, 67, 0.25);
+}
+.btn-gold:hover { color: #2a1f00; transform: translateY(-2px); }
+.btn-danger {
+    color: #fff;
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    box-shadow: 0 10px 24px rgba(239, 68, 68, 0.25);
+}
+.btn-danger:hover { color: #fff; transform: translateY(-2px); }
+.btn-admin.btn-sm { padding: 0.42rem 0.9rem; font-size: 0.8rem; }
+.status-badge.danger { background: var(--danger-bg); color: #f87171; }
+
+/* Toolbar search box with leading icon */
+.filter-search { position: relative; display: inline-flex; align-items: center; }
+.filter-search i {
+    position: absolute; left: 0.7rem; color: var(--text-muted);
+    font-size: 0.78rem; pointer-events: none;
+}
+.filter-search .form-control-admin { padding-left: 2rem; min-width: 220px; }
+
+/* Stacked label/value list */
+.info-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.info-list .info-item { width: 100%; }
+.info-list + .info-list { margin-top: 0.7rem; }
+
+/* Stock level bar + badges */
+.stock-meter {
+    display: block;
+    width: 100%;
+    height: 6px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+.stock-meter-lg { height: 10px; }
+.stock-meter-fill { display: block; height: 100%; border-radius: 6px; transition: width 0.4s ease; }
+.stock-meter-fill.fill-ok  { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.stock-meter-fill.fill-low { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.stock-meter-fill.fill-out { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.stock-count {
+    font-family: var(--font-heading); font-weight: 700; color: #fff; white-space: nowrap;
+}
+.stock-count-low { color: #fbbf24; }
+.stock-count-out { color: #f87171; }
+
+.stock-big { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.stock-big span { font-family: var(--font-heading); font-weight: 800; font-size: 2.6rem; line-height: 1; color: #fff; }
+.stock-big small { color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.04em; }
+.stock-big.low span { color: #fbbf24; }
+.stock-big.out span { color: #f87171; }
+
+/* Purchase order status pills (alias of .po-status-pill) */
+.po-status,
+.po-status-pill {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.3rem 0.8rem; border-radius: 50rem;
+    font-size: 0.72rem; font-weight: 700; white-space: nowrap;
+}
+.po-status.draft, .po-status.pending              { background: var(--warning-bg); color: #fbbf24; }
+.po-status.ordered                                { background: var(--info-bg); color: var(--accent-bright); }
+.po-status.partially_received                     { background: var(--warning-bg); color: #fcd34d; }
+.po-status.received                               { background: var(--success-bg); color: var(--success); }
+.po-status.cancelled                              { background: var(--danger-bg); color: #f87171; }
+
+/* Purchase order product picker */
+.po-search-results { position: absolute; z-index: 30; left: 0; right: 0; margin-top: 0.25rem; padding: 0.35rem; }
+.po-item-name { position: relative; }
+.po-search-list { max-height: 240px; overflow-y: auto; }
+.po-search-item {
+    display: block; padding: 0.5rem 0.7rem; border-radius: 8px;
+    color: var(--text-secondary); font-size: 0.84rem; transition: var(--transition);
+}
+.po-search-item:hover { background: rgba(0, 194, 217, 0.1); color: #fff; }
+.po-search-item small { display: block; color: var(--text-muted); font-size: 0.72rem; }
+
+/* PO totals panel */
+.po-totals { max-width: 420px; margin-left: auto; }
+.po-totals-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.55rem 0; border-bottom: 1px dashed var(--border);
+}
+.po-totals-row:last-child { border-bottom: none; }
+.po-totals-row span { color: var(--text-muted); font-size: 0.85rem; }
+.po-totals-row strong { color: #fff; font-family: var(--font-heading); }
+.po-totals-row.po-grand { border-top: 1px solid var(--border); margin-top: 0.35rem; padding-top: 0.85rem; }
+.po-totals-row.po-grand strong { font-size: 1.15rem; color: var(--accent-bright); }
+.po-totals-print { border-top: 1px solid var(--border); margin-top: 1.1rem; padding-top: 0.4rem; }
+
+/* PO printable document */
+.po-printable { max-width: 980px; margin: 0 auto; }
+.po-header {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    flex-wrap: wrap; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); margin-bottom: 1.2rem;
+}
+.po-brand { font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem; color: #fff; letter-spacing: 0.04em; }
+.po-number { font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; color: var(--accent-bright); }
+.po-meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+@media (max-width: 992px) { .po-meta-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .po-meta-grid { grid-template-columns: 1fr; } }
+
+.po-signatures { display: flex; gap: 2rem; margin-top: 2.6rem; flex-wrap: wrap; }
+.po-sign-line {
+    flex: 1; min-width: 200px; border-top: 1px solid var(--border);
+    padding-top: 0.5rem; color: var(--text-muted); font-size: 0.78rem;
+}
+
+/* Report layout */
+.report-section-title {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-heading); font-weight: 700; color: #fff;
+    font-size: 0.95rem; margin: 0 0 0.9rem;
+}
+.report-section-title i { color: var(--accent); }

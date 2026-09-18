@@ -1,0 +1,70 @@
+/* ===================================================================
+   Elegance Salon - PART 6 / Billing module
+   Payments, Invoices, Receipts, Revenue reports.
+   Designed to extend admin.css (dark luxury theme).
+   =================================================================== */
+
+/* ---- Amount alignment in tables ---- */
+.fin-amount      { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fin-amount-pos   { color: #4ade80; }
+.fin-amount-neg   { color: #f87171; }
+.fin-muted        { color: var(--text-muted); font-size: 0.85rem; }
+.fin-table th     { white-space: nowrap; }
+
+/* ---- Balance pill on invoice cards ---- */
+.fin-balance-pill { font-size: 0.8rem; padding: 0.3em 0.7em; border-radius: 50rem; font-weight: 600; }
+
+/* ---- Financial stat cards (revenue dashboard) ---- */
+.finance-grid { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+
+/* ---- Invoice print / receipt pages (standalone, no layout chrome) ---- */
+.fin-paper {
+    max-width: 860px;
+    margin: 2rem auto;
+    background: #fff;
+    color: #111;
+    border-radius: 14px;
+    padding: 2.4rem 2.6rem;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+.fin-paper h1, .fin-paper h2, .fin-paper h3, .fin-paper h4 {
+    color: #0e1626; font-weight: 700;
+}
+.fin-paper .paper-brand { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; }
+.fin-paper .paper-brand h1 { font-size: 1.4rem; margin: 0 0 0.15rem; }
+.fin-paper .paper-brand .sub { color: #5b6472; font-size: 0.85rem; }
+.fin-paper .paper-title { color: #0e1626; font-weight: 800; }
+.paper-table { width: 100%; border-collapse: collapse; }
+.paper-table th { background: #f1f5fb; color: #334155; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.05em; padding: 0.55rem 0.7rem; border-bottom: 1px solid #e2e8f0; }
+.paper-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid #eef2f7; color: #1e293b; font-size: 0.9rem; }
+.paper-totals { width: 100%; max-width: 320px; margin-left: auto; }
+.paper-totals td { padding: 0.4rem 0.7rem; color: #334155; border: none; }
+.paper-totals .grand { font-size: 1.1rem; font-weight: 800; color: #0e1626; border-top: 2px solid #0ea5c9; }
+.paper-foot { margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed #cbd5e1; color: #64748b; font-size: 0.82rem; }
+.paper-actionsbar { max-width: 860px; margin: 1.4rem auto 0; display: flex; gap: 0.6rem; justify-content: flex-end; }
+
+@media print {
+    .paper-actionsbar { display: none !important; }
+    body { background: #fff !important; }
+    .fin-paper { box-shadow: none; margin: 0; max-width: 100%; border-radius: 0; padding: 1rem 0; }
+}
+
+/* ---- Client / invoice search dropdowns ---- */
+.fin-search-wrap { position: relative; }
+.fin-search-results {
+    position: absolute; z-index: 60; top: 100%; left: 0; right: 0;
+    background: #101827; border: 1px solid var(--border); border-radius: 12px;
+    max-height: 300px; overflow-y: auto; display: none;
+    box-shadow: var(--shadow-card);
+}
+.fin-search-results.show { display: block; }
+.fin-search-results .result-item { padding: 0.6rem 0.9rem; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; gap: 0.8rem; align-items: center; }
+.fin-search-results .result-item:hover { background: rgba(0,194,217,0.08); }
+.fin-search-results .result-item small { color: var(--text-muted); }
+
+/* ---- Line item editor ---- */
+.fin-item-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr auto; gap: 0.6rem; align-items: center; margin-bottom: 0.6rem; }
+@media (max-width: 900px) { .fin-item-row { grid-template-columns: 1fr; } }
+
+/* ---- Daily closing ---- */
+.closing-total { font-size: 1.9rem; font-weight: 800; color: #fff; font-family: var(--font-heading); }
